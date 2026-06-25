@@ -1,0 +1,37 @@
+<h2>Lista de Interesse</h2>
+
+@if(filmes.length === 0){
+
+<p>
+Nenhum filme favoritado.
+</p>
+
+}
+
+@for(filme of filmes; track filme.id){
+
+<div>
+
+<h3>{{ filme.nome }}</h3>
+
+<p>
+
+<b>Gênero:</b>
+
+{{ filme.genero }}
+
+</p>
+
+<p>
+
+<b>Classificação:</b>
+
+{{ filme.classificacao }}
+
+</p>
+
+</div>
+
+<hr>
+
+}

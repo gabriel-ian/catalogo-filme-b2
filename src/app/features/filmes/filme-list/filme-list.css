@@ -1,0 +1,49 @@
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th {
+  background-color: #1f2937;
+  color: white;
+}
+
+th,
+td {
+  padding: 12px;
+  border: 1px solid #ddd;
+}
+
+tr:nth-child(even) {
+  background-color: #f9fafb;
+}
+
+tr:hover {
+  background-color: #e5e7eb;
+}
+
+input {
+  padding: 8px;
+  margin-right: 10px;
+}
+
+select {
+  padding: 8px;
+}
+
+button {
+  background-color: #dc2626;
+  color: white;
+
+  border: none;
+
+  padding: 6px 10px;
+
+  border-radius: 4px;
+
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #b91c1c;
+}

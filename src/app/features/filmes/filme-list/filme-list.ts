@@ -21,64 +21,56 @@ import { HighlightDirective } from '../../../shared/directives/highlight';
   ],
   templateUrl: './filme-list.html',
   styleUrl: './filme-list.css'
-
 })
 export class FilmeList {
 
   filmes: Filme[] = [];
-
   termoBusca = '';
-
   generoSelecionado = '';
+  carregando = true;
 
   constructor(
     private filmeService: FilmeService
   ) {}
 
   ngOnInit() {
-
-    this.filmes =
-      this.filmeService.getFilmes();
-
+    this.filmeService.getFilmes().subscribe({
+      next: (filmes) => {
+        this.filmes = filmes;
+        this.carregando = false;
+      },
+      error: (erro) => {
+        console.error('Erro Firebase:', erro);
+        alert('Erro ao carregar filmes do Firebase. Verifique as regras e o databaseURL.');
+        this.carregando = false;
+      }
+    });
   }
 
   excluir(id: string) {
-
     if (confirm('Deseja excluir este filme?')) {
-
-      this.filmeService.deleteFilme(id);
-
-      this.filmes =
-        this.filmeService.getFilmes();
-
+      this.filmeService.deleteFilme(id)
+        .then(() => {
+          alert('Filme excluído com sucesso!');
+        })
+        .catch((erro) => {
+          console.error('Erro ao excluir:', erro);
+          alert('Erro ao excluir filme.');
+        });
     }
-
   }
 
   get filmesFiltrados(): Filme[] {
+    return this.filmes.filter(filme => {
+      const nomeValido = filme.nome
+        .toLowerCase()
+        .includes(this.termoBusca.toLowerCase());
 
-    return this.filmes.filter(
-      filme => {
+      const generoValido =
+        !this.generoSelecionado ||
+        filme.genero === this.generoSelecionado;
 
-        const nomeValido =
-          filme.nome
-            .toLowerCase()
-            .includes(
-              this.termoBusca.toLowerCase()
-            );
-
-        const generoValido =
-          !this.generoSelecionado ||
-          filme.genero === this.generoSelecionado;
-
-        return (
-          nomeValido &&
-          generoValido
-        );
-
-      }
-    );
-
+      return nomeValido && generoValido;
+    });
   }
-
 }

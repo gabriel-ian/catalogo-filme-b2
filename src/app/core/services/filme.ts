@@ -1,4 +1,17 @@
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+
+import { initializeApp, getApp, getApps } from 'firebase/app';
+import {
+  Database,
+  getDatabase,
+  ref,
+  onValue,
+  set,
+  remove
+} from 'firebase/database';
+
+import { environment } from '../../../environment/environments';
 import { Filme } from '../models/filme.model';
 
 @Injectable({
@@ -6,41 +19,98 @@ import { Filme } from '../models/filme.model';
 })
 export class FilmeService {
 
-  private filmes: Filme[] = [];
+  private readonly caminho = 'filmes';
+  private database: Database;
 
-  constructor() {}
+  constructor() {
+    const app = getApps().length
+      ? getApp()
+      : initializeApp(environment.firebase);
 
-  getFilmes(): Filme[] {
-    return this.filmes;
+    this.database = getDatabase(app);
   }
 
-  getFilmeById(id: string): Filme | undefined {
-    return this.filmes.find(f => f.id === id);
+  getFilmes(): Observable<Filme[]> {
+    const filmesRef = ref(this.database, this.caminho);
+
+    return new Observable<Filme[]>((observer) => {
+      const unsubscribe = onValue(
+        filmesRef,
+        (snapshot) => {
+          const dados = snapshot.val();
+          observer.next(this.converterParaLista(dados));
+        },
+        (erro) => {
+          observer.error(erro);
+        }
+      );
+
+      return () => unsubscribe();
+    });
   }
 
-  addFilme(filme: Filme): void {
+  getFilmeById(id: string): Observable<Filme | null> {
+    const filmeRef = ref(this.database, `${this.caminho}/${id}`);
 
-    filme.id = crypto.randomUUID();
+    return new Observable<Filme | null>((observer) => {
+      const unsubscribe = onValue(
+        filmeRef,
+        (snapshot) => {
+          const dados = snapshot.val();
 
-    this.filmes.push(filme);
+          if (!dados) {
+            observer.next(null);
+            return;
+          }
+
+          observer.next({
+            ...dados,
+            id
+          } as Filme);
+        },
+        (erro) => {
+          observer.error(erro);
+        }
+      );
+
+      return () => unsubscribe();
+    });
   }
 
-  deleteFilme(id: string): void {
+  addFilme(filme: Filme): Promise<void> {
+    const id = crypto.randomUUID();
+    const filmeRef = ref(this.database, `${this.caminho}/${id}`);
 
-    this.filmes = this.filmes.filter(
-      filme => filme.id !== id
-    );
+    return set(filmeRef, {
+      ...filme,
+      id
+    });
   }
 
-  updateFilme(filmeAtualizado: Filme): void {
-
-    const index = this.filmes.findIndex(
-      filme => filme.id === filmeAtualizado.id
-    );
-
-    if (index !== -1) {
-      this.filmes[index] = filmeAtualizado;
+  updateFilme(filme: Filme): Promise<void> {
+    if (!filme.id) {
+      return Promise.reject('ID do filme não informado.');
     }
+
+    const filmeRef = ref(this.database, `${this.caminho}/${filme.id}`);
+
+    return set(filmeRef, filme);
   }
 
+  deleteFilme(id: string): Promise<void> {
+    const filmeRef = ref(this.database, `${this.caminho}/${id}`);
+    return remove(filmeRef);
+  }
+
+  private converterParaLista(dados: unknown): Filme[] {
+    if (!dados) {
+      return [];
+    }
+
+    return Object.entries(dados as Record<string, Omit<Filme, 'id'>>)
+      .map(([id, filme]) => ({
+        ...filme,
+        id
+      } as Filme));
+  }
 }

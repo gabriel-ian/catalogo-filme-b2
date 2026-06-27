@@ -1,0 +1,49 @@
+{
+  "filmes": [
+    {
+      "id": "1",
+      "nome": "Vingadores: Ultimato",
+      "genero": "Ação",
+      "duracao": 181,
+      "classificacao": "12",
+      "sinopse": "Os heróis restantes unem forças para enfrentar Thanos e restaurar o universo.",
+      "imagem": "https://m.media-amazon.com/images/I/81ExhpBEbHL._AC_SL1500_.jpg"
+    },
+    {
+      "id": "2",
+      "nome": "Toy Story",
+      "genero": "Animação",
+      "duracao": 81,
+      "classificacao": "L",
+      "sinopse": "Os brinquedos ganham vida quando ninguém está olhando.",
+      "imagem": "https://m.media-amazon.com/images/I/91gKqN2m6sL._AC_SL1500_.jpg"
+    },
+    {
+      "id": "3",
+      "nome": "Interestelar",
+      "genero": "Ficção",
+      "duracao": 169,
+      "classificacao": "10",
+      "sinopse": "Uma equipe de astronautas busca um novo lar para a humanidade.",
+      "imagem": "https://m.media-amazon.com/images/I/71n58R0K6KL._AC_SL1181_.jpg"
+    },
+    {
+      "id": "4",
+      "nome": "Invocação do Mal",
+      "genero": "Terror",
+      "duracao": 112,
+      "classificacao": "16",
+      "sinopse": "Investigadores paranormais ajudam uma família aterrorizada.",
+      "imagem": "https://m.media-amazon.com/images/I/81kD7Yx4ZUL._AC_SL1500_.jpg"
+    },
+    {
+      "id": "5",
+      "nome": "À Procura da Felicidade",
+      "genero": "Drama",
+      "duracao": 117,
+      "classificacao": "10",
+      "sinopse": "Um pai enfrenta dificuldades para construir um futuro melhor para o filho.",
+      "imagem": "https://m.media-amazon.com/images/I/71dKQmW2YFL._AC_SL1024_.jpg"
+    }
+  ]
+}

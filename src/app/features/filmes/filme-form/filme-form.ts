@@ -22,7 +22,6 @@ import { Filme } from '../../../core/models/filme.model';
   templateUrl: './filme-form.html',
   styleUrl: './filme-form.css'
 })
-
 export class FilmeForm {
 
   filmeForm: FormGroup;
@@ -35,76 +34,62 @@ export class FilmeForm {
     private route: ActivatedRoute,
     private router: Router
   ) {
-
     this.filmeForm = this.fb.group({
-
-      nome: ['', [Validators.required]],
-
+      nome: ['', Validators.required],
       genero: ['', Validators.required],
-
       duracao: ['', Validators.required],
-
       classificacao: ['', Validators.required],
-
       sinopse: ['', Validators.required],
-
       imagem: ['', Validators.required]
-
     });
-
   }
 
   ngOnInit() {
+    this.filmeId = this.route.snapshot.paramMap.get('id');
 
-    this.filmeId =
-      this.route.snapshot.paramMap.get('id');
-
-    if(this.filmeId){
-
-      const filme =
-        this.filmeService.getFilmeById(
-          this.filmeId
-        );
-
-      if(filme){
-
-        this.filmeForm.patchValue(
-          filme
-        );
-      }
+    if (this.filmeId) {
+      this.filmeService.getFilmeById(this.filmeId).subscribe({
+        next: (filme) => {
+          if (filme) {
+            this.filmeForm.patchValue(filme);
+          }
+        },
+        error: () => {
+          alert('Erro ao carregar filme.');
+        }
+      });
     }
   }
 
   salvar() {
-
-    if(this.filmeForm.invalid){
+    if (this.filmeForm.invalid) {
+      this.filmeForm.markAllAsTouched();
       return;
     }
 
     const filme: Filme = {
-
       id: this.filmeId ?? undefined,
-
       ...this.filmeForm.value
     };
 
-    if(this.filmeId){
-
-      this.filmeService.updateFilme(
-        filme
-      );
-
-      alert('Filme atualizado!');
+    if (this.filmeId) {
+      this.filmeService.updateFilme(filme)
+        .then(() => {
+          alert('Filme atualizado!');
+          this.router.navigate(['/filmes']);
+        })
+        .catch(() => {
+          alert('Erro ao atualizar filme.');
+        });
+    } else {
+      this.filmeService.addFilme(filme)
+        .then(() => {
+          alert('Filme cadastrado!');
+          this.router.navigate(['/filmes']);
+        })
+        .catch(() => {
+          alert('Erro ao cadastrar filme.');
+        });
     }
-    else{
-
-      this.filmeService.addFilme(
-        filme
-      );
-
-      alert('Filme cadastrado!');
-    }
-
-    this.router.navigate(['/filmes']);
   }
 }

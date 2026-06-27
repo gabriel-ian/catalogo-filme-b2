@@ -1,43 +1,53 @@
-@if(filme){
+@if(carregando){
 
-<h2>{{ filme.nome }}</h2>
+<p class="loading">Carregando detalhes do filme...</p>
 
-<img
-  [src]="filme.imagem"
-  width="300">
+} @else if(filme){
 
-<hr>
+<section class="detalhe">
 
-<p>
+  <img
+    [src]="filme.imagem"
+    [alt]="filme.nome">
 
-<strong>Gênero:</strong>
+  <div class="info">
 
-{{ filme.genero }}
+    <h2>{{ filme.nome }}</h2>
 
-</p>
+    <p>
+      <strong>Gênero:</strong>
+      {{ filme.genero }}
+    </p>
 
-<p>
+    <p>
+      <strong>Duração:</strong>
+      {{ filme.duracao }} min
+    </p>
 
-<strong>Duração:</strong>
+    <p>
+      <strong>Classificação:</strong>
+      {{ filme.classificacao | classificacao }}
+    </p>
 
-{{ filme.duracao }} minutos
+    <div class="sinopse">
+      <h3>Sinopse</h3>
+      <p>{{ filme.sinopse || 'Sinopse não cadastrada.' }}</p>
+    </div>
 
-</p>
+    <a routerLink="/filmes" class="voltar">
+      Voltar para lista
+    </a>
 
-<p>
+  </div>
 
-<strong>Classificação:</strong>
+</section>
 
-{{ filme.classificacao | classificacao }}
+} @else {
 
-</p>
+<p class="empty">Filme não encontrado.</p>
 
-<p>
-
-<strong>Sinopse:</strong>
-
-{{ filme.sinopse }}
-
-</p>
+<a routerLink="/filmes" class="voltar">
+  Voltar para lista
+</a>
 
 }

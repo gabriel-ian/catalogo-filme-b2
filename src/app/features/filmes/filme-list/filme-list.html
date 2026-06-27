@@ -1,107 +1,89 @@
-<h2>Lista de Filmes</h2>
+<h2>Catálogo de Filmes</h2>
 
-<a routerLink="/novo-filme">
-  Novo Filme
-</a>
+<div class="top-bar">
 
-<hr>
+  <a routerLink="/novo-filme" class="btn">
+    + Novo Filme
+  </a>
 
-<input
-  type="text"
-  placeholder="Buscar filme"
-  [(ngModel)]="termoBusca">
+  <input
+    type="text"
+    placeholder="Buscar filme..."
+    [(ngModel)]="termoBusca">
 
-<select [(ngModel)]="generoSelecionado">
+  <select [(ngModel)]="generoSelecionado">
+    <option value="">Todos os gêneros</option>
+    <option value="Ação">Ação</option>
+    <option value="Comédia">Comédia</option>
+    <option value="Drama">Drama</option>
+    <option value="Terror">Terror</option>
+    <option value="Ficção">Ficção</option>
+    <option value="Animação">Animação</option>
+  </select>
 
-  <option value="">
-    Todos os gêneros
-  </option>
+</div>
 
-  <option value="Ação">
-    Ação
-  </option>
+@if(carregando){
 
-  <option value="Comédia">
-    Comédia
-  </option>
+<p class="empty-state">
+  Carregando filmes...
+</p>
 
-  <option value="Drama">
-    Drama
-  </option>
+} @else if(filmesFiltrados.length === 0){
 
-  <option value="Terror">
-    Terror
-  </option>
-
-  <option value="Ficção">
-    Ficção
-  </option>
-
-</select>
-
-<br>
-<br>
-
-@if(filmesFiltrados.length === 0){
-
-  <p>Nenhum filme cadastrado.</p>
+<p class="empty-state">
+  Nenhum filme cadastrado.
+</p>
 
 } @else {
 
-<table border="1">
-
-  <tr>
-    <th>Nome</th>
-    <th>Gênero</th>
-    <th>Duração</th>
-    <th>Classificação</th>
-    <th>Ações</th>
-  </tr>
+<div class="catalogo">
 
   @for(filme of filmesFiltrados; track filme.id){
 
-    <tr appHighlight>
+  <div class="card" appHighlight>
 
-      <td>{{ filme.nome }}</td>
+    <img
+      [src]="filme.imagem"
+      [alt]="filme.nome">
 
-      <td>{{ filme.genero }}</td>
+    <h3>{{ filme.nome }}</h3>
 
-      <td>{{ filme.duracao }} min</td>
+    <p>
+      <strong>Gênero:</strong>
+      {{ filme.genero }}
+    </p>
 
-      <td>
-        {{ filme.classificacao | classificacao }}
-      </td>
+    <p>
+      <strong>Duração:</strong>
+      {{ filme.duracao }} min
+    </p>
 
-      <td>
+    <p>
+      <strong>Classificação:</strong>
+      {{ filme.classificacao | classificacao }}
+    </p>
 
-        <a
-          [routerLink]="['/filmes', filme.id]">
-          Detalhes
-        </a>
+    <div class="acoes">
 
-        |
+      <a [routerLink]="['/filmes', filme.id]">
+        Detalhes
+      </a>
 
-        <a
-          [routerLink]="[
-            '/editar-filme',
-            filme.id
-          ]">
-          Editar
-        </a>
+      <a [routerLink]="['/editar-filme', filme.id]">
+        Editar
+      </a>
 
-        |
+      <button (click)="excluir(filme.id!)">
+        Excluir
+      </button>
 
-        <button
-          (click)="excluir(filme.id!)">
-          Excluir
-        </button>
+    </div>
 
-      </td>
-
-    </tr>
+  </div>
 
   }
 
-</table>
+</div>
 
 }

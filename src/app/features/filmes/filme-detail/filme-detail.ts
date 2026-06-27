@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 
 import { FilmeService } from '../../../core/services/filme';
@@ -12,6 +12,7 @@ import { ClassificacaoPipe } from '../../../shared/pipes/classificacao-pipe';
   standalone: true,
   imports: [
     CommonModule,
+    RouterModule,
     ClassificacaoPipe
   ],
   templateUrl: './filme-detail.html',
@@ -19,7 +20,8 @@ import { ClassificacaoPipe } from '../../../shared/pipes/classificacao-pipe';
 })
 export class FilmeDetail {
 
-  filme?: Filme;
+  filme: Filme | null = null;
+  carregando = true;
 
   constructor(
     private route: ActivatedRoute,
@@ -27,11 +29,27 @@ export class FilmeDetail {
   ) {}
 
   ngOnInit() {
+    this.route.paramMap.subscribe(params => {
+      const id = params.get('id');
+      this.carregando = true;
+      this.filme = null;
 
-    const id = this.route.snapshot.paramMap.get('id');
+      if (!id) {
+        this.carregando = false;
+        return;
+      }
 
-    if (id) {
-      this.filme = this.filmeService.getFilmeById(id);
-    }
+      this.filmeService.getFilmeById(id).subscribe({
+        next: (filme) => {
+          this.filme = filme;
+          this.carregando = false;
+        },
+        error: (erro) => {
+          console.error('Erro ao carregar detalhes:', erro);
+          alert('Erro ao carregar detalhes do filme.');
+          this.carregando = false;
+        }
+      });
+    });
   }
 }

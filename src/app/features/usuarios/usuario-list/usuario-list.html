@@ -1,0 +1,55 @@
+<h2>Usuários</h2>
+
+<a routerLink="/novo-usuario" class="btn">
+  + Novo Usuário
+</a>
+
+<br>
+<br>
+
+@if(usuarios.length === 0){
+
+<p>Nenhum usuário cadastrado.</p>
+
+} @else {
+
+<table border="1">
+
+  <tr>
+    <th>Nome</th>
+    <th>E-mail</th>
+    <th>Perfil</th>
+    <th>Ações</th>
+  </tr>
+
+  @for(usuario of usuarios; track usuario.id){
+
+  <tr>
+
+    <td>{{ usuario.nome }}</td>
+
+    <td>{{ usuario.email }}</td>
+
+    <td>{{ usuario.perfil }}</td>
+
+    <td>
+
+      <a [routerLink]="['/editar-usuario', usuario.id]">
+        Editar
+      </a>
+
+      |
+
+      <button (click)="excluir(usuario.id!)">
+        Excluir
+      </button>
+
+    </td>
+
+  </tr>
+
+  }
+
+</table>
+
+}

@@ -1,0 +1,71 @@
+<div class="form-box">
+
+  @if(usuarioId){
+
+    <h2>Editar Usuário</h2>
+
+  } @else {
+
+    <h2>Cadastrar Usuário</h2>
+
+  }
+
+  <form
+    [formGroup]="usuarioForm"
+    (ngSubmit)="salvar()">
+
+    <div class="campo">
+
+      <label>Nome</label>
+
+      <input
+        type="text"
+        formControlName="nome">
+
+    </div>
+
+    <div class="campo">
+
+      <label>E-mail</label>
+
+      <input
+        type="email"
+        formControlName="email">
+
+    </div>
+
+    <div class="campo">
+
+      <label>Senha</label>
+
+      <input
+        type="password"
+        formControlName="senha">
+
+    </div>
+
+    <div class="campo">
+
+      <label>Perfil</label>
+
+      <select formControlName="perfil">
+
+        <option value="usuario">
+          Usuário
+        </option>
+
+        <option value="admin">
+          Administrador
+        </option>
+
+      </select>
+
+    </div>
+
+    <button type="submit">
+      Salvar
+    </button>
+
+  </form>
+
+</div>

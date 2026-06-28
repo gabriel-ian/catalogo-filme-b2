@@ -2,36 +2,57 @@
 
 @if(filmes.length === 0){
 
-<p>
-Nenhum filme favoritado.
+<p class="empty-state">
+  Nenhum filme adicionado à lista de interesse.
 </p>
 
-}
+} @else {
 
-@for(filme of filmes; track filme.id){
+<div class="catalogo">
 
-<div>
+  @for(filme of filmes; track filme.id){
 
-<h3>{{ filme.nome }}</h3>
+  <div class="card">
 
-<p>
+    <img
+      [src]="filme.imagem"
+      [alt]="filme.nome">
 
-<b>Gênero:</b>
+    <h3>{{ filme.nome }}</h3>
 
-{{ filme.genero }}
+    <p>
+      <strong>Gênero:</strong>
+      {{ filme.genero }}
+    </p>
 
-</p>
+    <p>
+      <strong>Duração:</strong>
+      {{ filme.duracao }} min
+    </p>
 
-<p>
+    <p>
+      <strong>Classificação:</strong>
+      {{ filme.classificacao | classificacao }}
+    </p>
 
-<b>Classificação:</b>
+    <div class="acoes">
 
-{{ filme.classificacao }}
+      <a [routerLink]="['/filmes', filme.id]">
+        Detalhes
+      </a>
 
-</p>
+      <button
+        type="button"
+        (click)="remover(filme.id!)">
+        Remover
+      </button>
+
+    </div>
+
+  </div>
+
+  }
 
 </div>
-
-<hr>
 
 }

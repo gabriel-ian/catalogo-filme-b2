@@ -2,7 +2,9 @@
 
 <div class="top-bar">
 
-  <a routerLink="/novo-filme" class="btn">
+  <a
+    routerLink="/novo-filme"
+    class="btn">
     + Novo Filme
   </a>
 
@@ -12,13 +14,35 @@
     [(ngModel)]="termoBusca">
 
   <select [(ngModel)]="generoSelecionado">
-    <option value="">Todos os gêneros</option>
-    <option value="Ação">Ação</option>
-    <option value="Comédia">Comédia</option>
-    <option value="Drama">Drama</option>
-    <option value="Terror">Terror</option>
-    <option value="Ficção">Ficção</option>
-    <option value="Animação">Animação</option>
+
+    <option value="">
+      Todos os gêneros
+    </option>
+
+    <option value="Ação">
+      Ação
+    </option>
+
+    <option value="Comédia">
+      Comédia
+    </option>
+
+    <option value="Drama">
+      Drama
+    </option>
+
+    <option value="Terror">
+      Terror
+    </option>
+
+    <option value="Ficção">
+      Ficção
+    </option>
+
+    <option value="Animação">
+      Animação
+    </option>
+
   </select>
 
 </div>
@@ -26,13 +50,17 @@
 @if(carregando){
 
 <p class="empty-state">
+
   Carregando filmes...
+
 </p>
 
 } @else if(filmesFiltrados.length === 0){
 
 <p class="empty-state">
-  Nenhum filme cadastrado.
+
+  Nenhum filme encontrado.
+
 </p>
 
 } @else {
@@ -41,7 +69,9 @@
 
   @for(filme of filmesFiltrados; track filme.id){
 
-  <div class="card" appHighlight>
+  <div
+    class="card"
+    appHighlight>
 
     <img
       [src]="filme.imagem"
@@ -50,31 +80,51 @@
     <h3>{{ filme.nome }}</h3>
 
     <p>
+
       <strong>Gênero:</strong>
+
       {{ filme.genero }}
+
     </p>
 
     <p>
+
       <strong>Duração:</strong>
+
       {{ filme.duracao }} min
+
     </p>
 
     <p>
+
       <strong>Classificação:</strong>
+
       {{ filme.classificacao | classificacao }}
+
     </p>
 
     <div class="acoes">
 
-      <a [routerLink]="['/filmes', filme.id]">
+      <a
+        [routerLink]="['/filmes', filme.id]">
         Detalhes
       </a>
 
-      <a [routerLink]="['/editar-filme', filme.id]">
+      <a
+        [routerLink]="['/editar-filme', filme.id]">
         Editar
       </a>
 
-      <button (click)="excluir(filme.id!)">
+      <button
+        type="button"
+        class="btn-interesse"
+        (click)="adicionarInteresse(filme)">
+        Interesse
+      </button>
+
+      <button
+        type="button"
+        (click)="excluir(filme.id!)">
         Excluir
       </button>
 

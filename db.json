@@ -1,49 +1,65 @@
 {
-  "filmes": [
-    {
+  "filmes": {
+    "1": {
       "id": "1",
       "nome": "Vingadores: Ultimato",
       "genero": "Ação",
       "duracao": 181,
       "classificacao": "12",
       "sinopse": "Os heróis restantes unem forças para enfrentar Thanos e restaurar o universo.",
-      "imagem": "https://m.media-amazon.com/images/I/81ExhpBEbHL._AC_SL1500_.jpg"
+      "imagem": "https://upload.wikimedia.org/wikipedia/pt/9/9b/Avengers_Endgame.jpg"
     },
-    {
+    "2": {
       "id": "2",
       "nome": "Toy Story",
       "genero": "Animação",
       "duracao": 81,
       "classificacao": "L",
       "sinopse": "Os brinquedos ganham vida quando ninguém está olhando.",
-      "imagem": "https://m.media-amazon.com/images/I/91gKqN2m6sL._AC_SL1500_.jpg"
+      "imagem": "https://upload.wikimedia.org/wikipedia/pt/a/a7/Toy_Story_1995.jpg"
     },
-    {
+    "3": {
       "id": "3",
       "nome": "Interestelar",
       "genero": "Ficção",
       "duracao": 169,
       "classificacao": "10",
-      "sinopse": "Uma equipe de astronautas busca um novo lar para a humanidade.",
-      "imagem": "https://m.media-amazon.com/images/I/71n58R0K6KL._AC_SL1181_.jpg"
+      "sinopse": "Uma equipe de astronautas viaja através de um buraco de minhoca em busca de um novo lar para a humanidade.",
+      "imagem": "https://upload.wikimedia.org/wikipedia/pt/3/3a/Interstellar_Filme.png"
     },
-    {
+    "4": {
       "id": "4",
       "nome": "Invocação do Mal",
       "genero": "Terror",
       "duracao": 112,
       "classificacao": "16",
-      "sinopse": "Investigadores paranormais ajudam uma família aterrorizada.",
-      "imagem": "https://m.media-amazon.com/images/I/81kD7Yx4ZUL._AC_SL1500_.jpg"
+      "sinopse": "Investigadores paranormais ajudam uma família aterrorizada por uma presença maligna em sua casa.",
+      "imagem": "https://upload.wikimedia.org/wikipedia/pt/9/9b/The_Conjuring_poster.jpg"
     },
-    {
+    "5": {
       "id": "5",
       "nome": "À Procura da Felicidade",
       "genero": "Drama",
       "duracao": 117,
       "classificacao": "10",
-      "sinopse": "Um pai enfrenta dificuldades para construir um futuro melhor para o filho.",
-      "imagem": "https://m.media-amazon.com/images/I/71dKQmW2YFL._AC_SL1024_.jpg"
+      "sinopse": "Um pai enfrenta dificuldades financeiras enquanto luta para construir um futuro melhor para seu filho.",
+      "imagem": "https://upload.wikimedia.org/wikipedia/pt/8/81/%C3%80_Procura_da_Felicidade.jpg"
     }
-  ]
+  },
+  "usuarios": {
+    "1": {
+      "id": "1",
+      "nome": "Administrador",
+      "email": "admin@email.com",
+      "senha": "123456",
+      "perfil": "admin"
+    },
+    "2": {
+      "id": "2",
+      "nome": "Usuário Teste",
+      "email": "usuario@email.com",
+      "senha": "123456",
+      "perfil": "usuario"
+    }
+  }
 }

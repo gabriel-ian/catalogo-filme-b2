@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 
+import { InteresseService } from '../../../core/services/interesse';
 import { FilmeService } from '../../../core/services/filme';
 import { Filme } from '../../../core/models/filme.model';
 
@@ -30,7 +31,8 @@ export class FilmeList {
   carregando = true;
 
   constructor(
-    private filmeService: FilmeService
+    private filmeService: FilmeService,
+    private interesseService: InteresseService
   ) {}
 
   ngOnInit() {
@@ -58,6 +60,11 @@ export class FilmeList {
           alert('Erro ao excluir filme.');
         });
     }
+  }
+
+  adicionarInteresse(filme: Filme): void {
+    this.interesseService.adicionar(filme);
+    alert('Filme adicionado à lista de interesse!');
   }
 
   get filmesFiltrados(): Filme[] {

@@ -1,9 +1,43 @@
 <nav>
+
   <a routerLink="/">Home</a>
-  <a routerLink="/filmes">Filmes</a>
-  <a routerLink="/novo-filme">Novo Filme</a>
-  <a routerLink="/interesse">Lista de Interesse</a>
+
+  @if(!estaLogado()){
+
+    <a routerLink="/login">Login</a>
+
+  }
+
+  @if(estaLogado()){
+
+    <a routerLink="/filmes">Filmes</a>
+
+    <a routerLink="/novo-filme">Novo Filme</a>
+
+    <a routerLink="/interesse">Lista de Interesse</a>
+
+    <a routerLink="/usuarios">Usuários</a>
+
+    <button
+      type="button"
+      (click)="sair()">
+      Sair
+    </button>
+
+  }
+
 </nav>
+
+@if(estaLogado()){
+
+  <div class="usuario-logado">
+
+    Bem-vindo,
+    <strong>{{ usuarioLogado()?.nome }}</strong>
+
+  </div>
+
+}
 
 <div class="container">
   <router-outlet />

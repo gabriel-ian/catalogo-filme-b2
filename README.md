@@ -1,4 +1,124 @@
-# CatalogoFilmesB2
+Catálogo de Filmes B2
+
+📌 Objetivo da Aplicação
+
+O Catálogo de Filmes B2 é uma aplicação web desenvolvida em Angular para gerenciamento de filmes.
+
+O sistema permite realizar o cadastro, consulta, edição e exclusão de filmes, além de manter uma lista de interesse, autenticação de usuários e controle de acesso às funcionalidades da aplicação.
+
+Os dados são armazenados no Firebase Realtime Database, permitindo acesso compartilhado entre diferentes usuários.
+
+---
+
+🚀 Tecnologias Utilizadas
+
+- Angular 21
+- TypeScript
+- HTML5
+- CSS3
+- Firebase Realtime Database
+- Firebase Hosting
+- Git
+- GitHub
+
+---
+
+▶️ Instruções de Execução
+
+1. Clonar o repositório
+
+```bash
+git clone https://github.com/gabriel-ian/catalogo-filme-b2.git
+```
+
+2. Entrar na pasta
+
+```bash
+cd catalogo-filme-b2
+```
+
+3. Instalar as dependências
+
+```bash
+npm install
+```
+
+4. Executar a aplicação
+
+```bash
+ng serve
+```
+
+A aplicação estará disponível em:
+
+```
+http://localhost:4200
+```
+
+---
+
+🌐 Aplicação Online
+
+Acesse o sistema através do link:
+
+https://catalogofilmeb2.web.app
+
+---
+
+✨ Funcionalidades
+
+Filmes
+
+- Cadastro de filmes
+- Listagem de filmes
+- Edição de filmes
+- Exclusão de filmes
+- Visualização dos detalhes
+- Busca por nome
+- Filtro por gênero
+
+Lista de Interesse
+
+- Adicionar filme à lista de interesse
+- Remover filme da lista de interesse
+
+Usuários
+
+- Cadastro de usuários
+- Listagem de usuários
+- Edição de usuários
+- Exclusão de usuários
+
+Segurança
+
+- Login
+- Logout
+- Controle de sessão
+- Proteção de rotas (Auth Guard)
+
+Persistência
+
+- Firebase Realtime Database
+
+Publicação
+
+- Firebase Hosting
+
+---
+
+👨‍💻 Desenvolvedor
+
+Gabriel Ian
+
+Universidade UNISEP
+
+Disciplina: Desenvolvimento Web
+
+CatalogoFilmesB2
+
+
+
+
 
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.2.0.
 
